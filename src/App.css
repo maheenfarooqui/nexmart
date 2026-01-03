@@ -1,0 +1,36 @@
+/* src/App.css */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; /* Taaki footer hamesha neche rahe */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-m);
+}
+
+/* Common Section Styling */
+.section-padding {
+  padding: var(--spacing-l) 0;
+}
+
+/* Utility for Lime Green Buttons */
+.btn-primary {
+  background-color: var(--color-brand);
+  color: var(--color-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(141, 196, 71, 0.3);
+}

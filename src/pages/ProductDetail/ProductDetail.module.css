@@ -1,0 +1,119 @@
+/* .container {
+  padding: 20px 70px;
+  background-color: var(--color-text-dim);
+} */
+
+.backBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-brand);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: var(--spacing-m);
+  margin-top: 20px;
+  margin-left: 50px;
+  font-weight: 600;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  background-color: var(--color-text-dim);
+  padding: 20px 70px;
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mainImg {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.categoryTag {
+  color: var(--color-brand);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.productTitle {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+.priceTag {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-brand);
+  margin-bottom: var(--spacing-m);
+}
+
+.sellerInfo {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chatBtn {
+  flex: 1;
+  background-color: transparent;
+  color: var(--color-brand);
+  border: 2px solid var(--color-brand);
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buyBtn {
+  flex: 1;
+  background-color: var(--color-brand);
+  color: var(--color-black);
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.trustBadges {
+  display: flex;
+  gap: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 900px) {
+  .wrapper { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
+}

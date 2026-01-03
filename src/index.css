@@ -1,0 +1,33 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+:root {
+  /* NexMart Branding Colors */
+  --color-brand: #8DC447;       /* Lime Green */
+  --color-bg-dark:  #FFFFFF;     /* Midnight Background */
+  --color-text-main: #FFFFFF;    /* Pure White for Headings */
+  --color-text-dim: #120E2F;     /* Deep Text (Aapka diya hua secondary text) */
+ 
+  
+  /* Helper Scales */
+  --spacing-s: 8px;
+  --spacing-m: 16px;
+  --spacing-l: 32px;
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --nav-height: 80px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}

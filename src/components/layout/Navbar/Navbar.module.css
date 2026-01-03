@@ -1,0 +1,70 @@
+/* src/components/layout/Navbar/Navbar.module.css */
+.navbar {
+  height: var(--nav-height);
+  /* backdrop-filter: blur(10px); */
+  border-bottom: 1px solid rgba(141, 196, 71, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color:#FFFFFF;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1400px;
+  padding: 10px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoImage{
+  width: 120px;
+}
+.heading h1{
+  color: var(--color-text-dim);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.heading span{
+  color: var(--color-brand);
+}
+/* Action Buttons */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sellBtn {
+  background-color: var(--color-brand);
+  color: var(--color-black);
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+
+.sellBtn:hover {
+  transform: translateY(-2px);
+}
+
+.navIcon, .profileIcon {
+  color: var(--color-text-dim);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.navIcon:hover, .profileIcon:hover {
+  color: var(--color-brand);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .searchBar { display: none; } /* Mobile par search hide ya icon mein convert */
+  .sellBtn span { display: none; } /* Mobile par sirf icon */
+}
