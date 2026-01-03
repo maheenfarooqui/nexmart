@@ -47,8 +47,23 @@
   gap: 8px;
   transition: transform 0.2s;
 }
+.logoutBtn{
+  background-color: var(--color-brand);
+  color: var(--color-black);
+  padding: 12px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  outline: none;
+  transition: transform 0.2s;
+  cursor: pointer;
 
-.sellBtn:hover {
+}
+
+.sellBtn:hover , .logoutBtn:hover {
   transform: translateY(-2px);
 }
 
@@ -61,6 +76,50 @@
 
 .navIcon:hover, .profileIcon:hover {
   color: var(--color-brand);
+}
+.loginGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.loginGroup:hover {
+  color: var(--color-brand);
+}
+
+.loginText {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.userEmail {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.logoutBtn {
+  background: transparent;
+  border: 1px solid var(--color-brand);
+  color: var(--color-brand);
+  padding: 11px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logoutBtn:hover {
+  background: var(--color-brand);
+  color: black;
 }
 
 /* Responsive */
