@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'; // 1. useState import karein
+import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch, FiUser, FiPlusCircle, FiShoppingBag } from 'react-icons/fi';
 import styles from './Navbar.module.css';
 import logoImg from '../../../assets/logo.png';
@@ -13,6 +13,18 @@ const Navbar = () => {
   const handleLogout = () => {
     signOut(auth);
   };
+  const [searchTerm, setSearchTerm] = useState(''); // State banayein
+  const navigate = useNavigate(); // Hook initialize karein
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/?search=${searchTerm}`); // URL ko change karega: e.g. /?search=iphone
+      setSearchTerm('');
+    } else {
+      navigate('/');
+    }
+  };
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
@@ -25,9 +37,18 @@ const Navbar = () => {
         </div>
 
         {/* 2. Search Bar (Marketplace ka main feature) */}
-        <div className={styles.heading}>
-         <h1>BUY<span> . </span>SELL<span> . </span>CONNECT</h1>
-        </div>
+  
+        <div className={styles.searchBar}>
+        <form onSubmit={handleSearch} className={styles.searchForm}>
+          <input 
+            type="text" 
+            placeholder="Search for items..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button type="submit"><FiSearch /></button>
+        </form>
+      </div>
 
         {/* 3. Action Links */}
         <div className={styles.navLinks}>

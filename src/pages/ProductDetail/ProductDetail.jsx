@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // useState aur useEffect add kiya
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../../data';
+import { db } from '../../services/firebase'; // Database connection
+import { doc, getDoc } from 'firebase/firestore';
 import { FiArrowLeft, FiMessageCircle, FiShield, FiTruck } from 'react-icons/fi';
 import styles from './ProductDetail.module.css';
 
@@ -8,9 +9,34 @@ const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   
-  // Find the product by ID
-  const product = products.find((p) => p.id === parseInt(id));
+  // 1. Nayi States banayein
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // 2. Firebase se data mangwane ka tareeka
+  useEffect(() => {
+    const getProductData = async () => {
+      try {
+        const docRef = doc(db, "products", id); // specific product ki ID
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProduct(docSnap.data());
+        } else {
+          console.log("Product nahi mila!");
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        setLoading(false);
+      }
+    };
+
+    getProductData();
+  }, [id]);
+
+  // 3. Loading state dikhayein
+  if (loading) return <div className={styles.loading}>Loading Product Details...</div>;
   if (!product) return <div className={styles.error}>Product not found!</div>;
 
   return (

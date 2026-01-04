@@ -22,13 +22,34 @@
 .logoImage{
   width: 120px;
 }
-.heading h1{
-  color: var(--color-text-dim);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.searchBar .searchForm {
+  flex: 1;
+  width: 500px;
+  display: flex;
+  border-radius: 8px;
+  margin: 0 50px;
+  padding: 4px 12px;
+  border: var(--color-text-dim) solid 1px;
 }
-.heading span{
+
+ .searchBar input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  color:var(--color-text-dim);
+  outline: none;
+}
+
+.searchBar button {
+  background: transparent;
+  border: none;
   color: var(--color-brand);
-}
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+} 
 /* Action Buttons */
 .navLinks {
   display: flex;
@@ -65,6 +86,7 @@
 
 .sellBtn:hover , .logoutBtn:hover {
   transform: translateY(-2px);
+  color: var(--color-text-dim);
 }
 
 .navIcon, .profileIcon {
@@ -74,7 +96,7 @@
   transition: color 0.2s;
 }
 
-.navIcon:hover, .profileIcon:hover {
+.navIcon:hover, .profileIcon:hover{
   color: var(--color-brand);
 }
 .loginGroup {
