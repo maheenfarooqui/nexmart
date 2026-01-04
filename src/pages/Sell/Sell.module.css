@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.sellForm {
+  background: var(--color-text-dim);
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 550px;
+  border: 1px solid rgba(141, 196, 71, 0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.title { margin-bottom: 2rem; text-align: center; }
+.accent { color: var(--color-brand); }
+
+.sellForm label {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.sellForm input, .sellForm select, .sellForm textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  font-family: inherit;
+}
+
+.sellForm input:focus, .sellForm textarea:focus {
+  border-color: var(--color-brand);
+}
+
+.sellForm textarea { height: 120px; resize: none; }
+
+.submitBtn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 15px;
+  background: var(--color-brand);
+  color: var(--color-black);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submitBtn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(141, 196, 71, 0.3); }
