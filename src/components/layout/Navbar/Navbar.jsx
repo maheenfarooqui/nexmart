@@ -65,11 +65,16 @@ const Navbar = () => {
   /* Case 1: Agar User Login hai (Logout dikhao) */
   <div className={styles.userSection}>
     <span className={styles.userEmail}>{user.email.split('@')[0]}</span>
+    {/* 2. My Ads ka Link (Naya Addition) */}
+    <Link to="/my-ads" className={styles.myAdsLink}>
+      My Ads
+    </Link>
     <button onClick={handleLogout} className={styles.logoutBtn}>
       LogOut
     </button>
   </div>
 ) : (
+  
   /* Case 2: Agar User Login NAHI hai (Login par bhejo) */
   <Link to="/login" className={styles.loginGroup}>
     {/* <FiUser size={22} /> */}

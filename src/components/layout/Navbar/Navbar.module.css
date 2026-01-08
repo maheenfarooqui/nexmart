@@ -143,6 +143,33 @@
   background: var(--color-brand);
   color: black;
 }
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Items ke darmiyan space */
+}
+
+.myAdsLink {
+  color: var(--color-brand); /* NexMart Green ya koi aur color */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border: 1px solid var(--color-brand);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.myAdsLink:hover {
+  background: var(--color-brand);
+  color: black;
+}
+
+.userEmail {
+  color: #ccc;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
 
 /* Responsive */
 @media (max-width: 768px) {

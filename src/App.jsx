@@ -10,6 +10,7 @@ import Signup from './pages/Auth/Signup';
 import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Auth/Login';
 import Sell from './pages/Sell/Sell';
+import MyAds from './pages/MyAds/MyAds';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
            <Route path="/signup" element={<Signup />} />
            <Route path="/login" element={<Login />} />
            <Route path="/sell" element={<Sell />} />
+           <Route path="/my-ads" element={<MyAds />} />
            
           </Routes>
         </main>

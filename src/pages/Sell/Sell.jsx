@@ -14,34 +14,52 @@ const Sell = () => {
     title: '',
     price: '',
     category: '',
+    phone: '',
     description: '',
-    image: ''
   });
-  useEffect(() => {
-    if (!user) {
-      alert("Pehle login karein!");
-      navigate('/login');
-    }
-  }, [user, navigate]);
-  
+  const [imageFile, setImageFile] = useState(null); // File state alag rakhein
+  const [loading, setLoading] = useState(false);
+  const uploadToImgBB = async (file) => {
+    const data = new FormData();
+    data.append("image", file);
+    
+    // Yahan apni API key lagayein
+    const apiKey = "594ccadc84835afb853feeaaf7b247ce"; 
+    
+    const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+      method: "POST",
+      body: data,
+    });
+    const result = await response.json();
+    return result.data.url; // Direct image URL milega
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) return alert("Please login to post an ad!");
+    if (!imageFile) return alert("Please select an image!");
 
+    setLoading(true); // Process shuru
     try {
-      // Database mein 'products' collection mein naya document add karna
+      // 2. Pehle image upload hogi
+      const uploadedImageUrl = await uploadToImgBB(imageFile);
+
+      // 3. Phir Firestore mein data jayega
       await addDoc(collection(db, "products"), {
         ...formData,
-        price: Number(formData.price), // Price ko number mein convert karna zaroori hai
+        image: uploadedImageUrl, // ImgBB wala link yahan save hoga
+        price: Number(formData.price),
         sellerId: user.uid,
         sellerEmail: user.email,
         createdAt: new Date()
       });
       
       alert("Product Listed Successfully!");
-      navigate('/'); // Wapas home page par bhej dein
+      navigate('/my-ads'); // Behter hai ke my-ads pe jaye takay user apna ad dekh sakay
     } catch (err) {
       alert("Error: " + err.message);
+    } finally {
+      setLoading(false); // Process khatam
     }
   };
 
@@ -51,8 +69,12 @@ const Sell = () => {
         <h2 className={styles.title}>Post Your <span className={styles.accent}>Ad</span></h2>
         
         <label>Product Title</label>
-        <input type="text" placeholder="e.g. iPhone 15 Pro Max" 
-          onChange={(e) => setFormData({...formData, title: e.target.value})} required />
+          <input 
+  type="text" 
+  placeholder="e.g. iPhone 15 Pro Max" 
+  onChange={(e) => setFormData({...formData, title: e.target.value})} 
+  required 
+/>
 
         <label>Category</label>
         <select onChange={(e) => setFormData({...formData, category: e.target.value})} required>
@@ -68,8 +90,19 @@ const Sell = () => {
           onChange={(e) => setFormData({...formData, price: e.target.value})} required />
 
         <label>Image URL</label>
-        <input type="url" placeholder="Paste an image link (Unsplash or Pinterest)" 
-          onChange={(e) => setFormData({...formData, image: e.target.value})} required />
+        <input 
+  type="file" 
+  accept="image/*" 
+  onChange={(e) => setImageFile(e.target.files[0])} 
+  required 
+/>
+<label>WhatsApp Number (e.g. 923xxxxxxxx)</label>
+<input 
+  type="text" 
+  placeholder="923001234567" 
+  onChange={(e) => setFormData({...formData, phone: e.target.value})} 
+  required 
+/>
 
         <label>Description</label>
         <textarea placeholder="Describe what you are selling..." 
