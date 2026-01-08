@@ -147,14 +147,16 @@
   display: flex;
   align-items: center;
   gap: 15px; /* Items ke darmiyan space */
+  
 }
 
 .myAdsLink {
   color: var(--color-brand); /* NexMart Green ya koi aur color */
   text-decoration: none;
   font-weight: 600;
+  white-space: nowrap;
   font-size: 0.9rem;
-  padding: 5px 10px;
+  padding: 8px 10px;
   border: 1px solid var(--color-brand);
   border-radius: 4px;
   transition: 0.3s;
@@ -166,9 +168,33 @@
 }
 
 .userEmail {
-  color: #ccc;
-  font-size: 0.85rem;
-  text-transform: capitalize;
+  display: inline-block;
+  max-width: 100px; /* Email ki width limit */
+  white-space: nowrap; /* Text ko line change karne se rokega */
+  overflow: hidden; /* Jo text limit se bahar jaye usay chhupa dega */
+  text-overflow: ellipsis; /* Text ke aakhir mein ... laga dega */
+  font-weight: bold;
+  color: #333;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.cartContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  border: 2px solid white;
 }
 
 /* Responsive */

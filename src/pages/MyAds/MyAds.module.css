@@ -1,4 +1,4 @@
-.myAdsContainer {
+/* .myAdsContainer {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -19,6 +19,52 @@
   text-align: center;
 }
 
+*/
+
+.dashboardContainer {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mainTitle { text-align: center; color: #333; margin-bottom: 40px; }
+.sectionTitle { color:var(--color-text-dim); border-left: 5px solid var(--color-brand); padding-left: 10px; margin-bottom: 20px; }
+
+/* Grid for Products */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.adCard {
+  background-color: var(--color-text-dim);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.adCard:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-brand);
+}
+
+.adImage { width: 100%; height: 180px; object-fit: cover; }
+.adInfo { padding: 15px; }
+.adtitle{
+  margin: 8px 0;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.actionBtns{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .deleteBtn {
   background: #ff4d4d;
   color: white;
@@ -27,9 +73,52 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%;
+  width:45%;
+  font-size: 14px;
 }
-
 .deleteBtn:hover {
   background: #cc0000;
 }
+.editBtn {
+  background: var(--color-brand); /* Blue */
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width:45%;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+.editBtn:hover {
+  background:transparent;
+  border: 1px solid var(--color-brand);
+}
+
+/* Orders Styling */
+.orderList { display: flex; flex-direction: column; gap: 15px; }
+
+.orderCard {
+  background: #f9f9f9;
+  border-left: 6px solid var(--color-brand);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.orderDetail { display: flex; flex-direction: column; }
+.orderLabel { font-size: 12px; color: #888; text-transform: uppercase; }
+.orderValue { font-weight: bold; color: #333; }
+
+.statusBadge {
+  background: var(--color-brand); color: var(--color-text-dim);
+  padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold;
+}
+
+.divider { margin: 40px 0; border: 0; border-top: 1px solid #eee; }
+.emptyMsg { color: #999; font-style: italic; }

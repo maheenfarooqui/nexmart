@@ -56,6 +56,12 @@ useEffect(() => {
 
   fetchProducts();
 }, [activeCategory, searchQuery]);
+const handleScroll = () => {
+    const element = document.getElementById('gallery-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className={styles.homeContainer}>
       {/* Hero Section */}
@@ -70,10 +76,10 @@ useEffect(() => {
           </p>
           
           <div className={styles.ctaButtons}>
-            <button className={styles.primaryBtn}>
+            <button onClick={handleScroll} className={styles.primaryBtn}>
               Browse Gallery <FiShoppingBag />
             </button>
-            <button className={styles.secondaryBtn}>
+            <button onClick={() => navigate('/sell')} className={styles.secondaryBtn}>
               Start Selling <FiArrowRight />
             </button>
           </div>
@@ -115,16 +121,24 @@ useEffect(() => {
           </button>
         </div>
       )}
-      <section className={styles.listings}>
+      <section className={styles.listings} id="gallery-section">
   <div className={styles.sectionHeader}>
-    <h2>Recent <span className={styles.highlight}>Listings</span></h2>
-    <button className={styles.seeAll}>See All</button>
+    <h2>
+      <span className={styles.highlight}>
+        {activeCategory === 'All' ? 'All Products' : `${activeCategory}`}
+      </span>
+    </h2>
+  
   </div>
   
   <div className={styles.grid}>
-    {products.map(product => (
-      <ProductCard key={product.id} product={product} />
-    ))}
+    {products.length > 0 ? (
+      products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))
+    ) : (
+      <p className={styles.noProducts}>No products found in this category.</p>
+    )}
   </div>
 </section>
     </div>

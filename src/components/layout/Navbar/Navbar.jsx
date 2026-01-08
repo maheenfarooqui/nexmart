@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // 1. useState import karein
+import React, { useState , useEffect } from 'react'; // 1. useState import karein
 import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch, FiUser, FiPlusCircle, FiShoppingBag } from 'react-icons/fi';
 import styles from './Navbar.module.css';
@@ -9,6 +9,20 @@ import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
   const { user } = useAuth(); // User ka state lein
+  const [wishlistCount, setWishlistCount] = useState(0);
+
+  const updateCount = () => {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    setWishlistCount(wishlist.length);
+  };
+
+  useEffect(() => {
+    updateCount(); // Pehli baar load hone par
+    
+    // Jab bhi heart click ho, ye listen karega
+    window.addEventListener("wishlistUpdated", updateCount);
+    return () => window.removeEventListener("wishlistUpdated", updateCount);
+  }, []);
 
   const handleLogout = () => {
     signOut(auth);
@@ -56,15 +70,20 @@ const Navbar = () => {
             <FiPlusCircle /> <span>Sell</span>
           </Link>
           
-          <Link to="/browse" className={styles.navIcon}>
-             <FiShoppingBag size={22} />
+          <Link to="/wishlist" className={styles.navIcon}>
+             <div className={styles.cartContainer}>
+        <FiShoppingBag size={24} />
+        {wishlistCount > 0 && (
+          <span className={styles.badge}>{wishlistCount}</span>
+        )}
+      </div>
           </Link>
 
 
  {user ? (
   /* Case 1: Agar User Login hai (Logout dikhao) */
   <div className={styles.userSection}>
-    <span className={styles.userEmail}>{user.email.split('@')[0]}</span>
+    <span className={styles.userEmail} title={user.email}>{user.email.split('@')[0]}</span>
     {/* 2. My Ads ka Link (Naya Addition) */}
     <Link to="/my-ads" className={styles.myAdsLink}>
       My Ads

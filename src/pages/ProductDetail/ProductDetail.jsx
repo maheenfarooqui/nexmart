@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"; // useState aur useEffect add kiya
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../../services/firebase"; // Database connection
-import { doc, getDoc } from "firebase/firestore";
+import { db ,auth } from "../../services/firebase"; // Database connection
+import { doc, getDoc,addDoc,collection } from "firebase/firestore";
 import {
   FiArrowLeft,
   FiMessageCircle,
@@ -28,7 +28,7 @@ const ProductDetail = () => {
         if (docSnap.exists()) {
           setProduct(docSnap.data());
         } else {
-          console.log("Product nahi mila!");
+          console.log("Product not found!");
         }
         setLoading(false);
       } catch (error) {
@@ -44,11 +44,25 @@ const ProductDetail = () => {
   if (loading)
     return <div className={styles.loading}>Loading Product Details...</div>;
   if (!product) return <div className={styles.error}>Product not found!</div>;
-  // Buttons ke functions
-  const handleBuyNow = () => {
-    alert(`Order request sent for ${product.title}!`);
-    // Agle step mein hum yahan 'orders' collection mein data bhejenge
-  };
+const handleBuyNow = async () => {
+  if (!auth.currentUser) return alert("Login to place an order!");
+
+  try {
+    await addDoc(collection(db, "orders"), {
+      productId: id,
+      productTitle: product.title,
+      price: product.price,
+      sellerId: product.sellerId, // Kisne becha
+      buyerId: auth.currentUser.uid, // Kisne khareeda
+      buyerEmail: auth.currentUser.email,
+      status: "Pending", // Shuru mein pending
+      createdAt: new Date()
+    });
+    alert("Order request recorded! Seller will contact you.");
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+};
 
   const handleContactSeller = () => {
   if (product && product.phone) {

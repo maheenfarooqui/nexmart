@@ -21,8 +21,10 @@
 }
 
 .highlight {
-  color: var(--color-brand); /* Lime Green */
+  color: var(--color-brand);
+  margin-left: 70px; /* Lime Green */
 }
+
 
 .subtitle {
   font-size: 1.2rem;
@@ -82,7 +84,9 @@
 }
 .listings {
   padding: var(--spacing-l) 0;
+   scroll-margin-top: 80px;
 }
+
 
 .sectionHeader {
   display: flex;
@@ -98,13 +102,7 @@
   padding: 20px 70px;
 }
 
-.seeAll {
-  background: transparent;
-  color: var(--color-brand);
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
+
 .categoryBar {
   display: flex;
   justify-content: center;

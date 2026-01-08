@@ -22,6 +22,17 @@
   text-align: justify;
   margin-top: -20px;
 }
+.footerBtn{
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.footerBtn:hover { color: var(--color-brand); padding-left: 5px; }
 
 .socials {
   display: flex;

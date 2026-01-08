@@ -1,10 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate, Link } from 'react-router-dom';
 import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiMail } from 'react-icons/fi';
 import styles from './Footer.module.css';
 import logoFImg from '../../../assets/flogo.png';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleBrowseListings = () => {
+    // Agar hum Home page par nahi hain, to pehle home par jao
+    navigate('/');
+    
+    // Thora ruk kar scroll karo taaki page load ho jaye
+    setTimeout(() => {
+      const element = document.getElementById('gallery-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -26,7 +40,9 @@ const Footer = () => {
         <div className={styles.column}>
           <h3>Platform</h3>
           <ul>
-            <li><Link to="/">Browse Listings</Link></li>
+            <li><button onClick={handleBrowseListings} className={styles.footerBtn}>
+          Browse Listings
+        </button></li>
             <li><Link to="/sell">Start Selling</Link></li>
             <li><Link to="/how-it-works">How it Works</Link></li>
           </ul>
