@@ -43,6 +43,7 @@
   color: var(--color-text-main);
   font-size: 1.2rem;
   transition: 0.3s;
+
 }
 
 .socials a:hover { color: var(--color-brand); transform: translateY(-3px); }
@@ -61,6 +62,7 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .column ul li a:hover { color: var(--color-brand); padding-left: 5px; }

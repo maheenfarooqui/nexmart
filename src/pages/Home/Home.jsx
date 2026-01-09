@@ -15,6 +15,19 @@ const Home = () => {
   const location = useLocation();
 const searchParams = new URLSearchParams(location.search);
 const searchQuery = searchParams.get('search');
+useEffect(() => {
+  if (location.state && location.state.selectedCategory) {
+    setActiveCategory(location.state.selectedCategory);
+    
+    // Scroll automatically to products when coming from footer
+    setTimeout(() => {
+      handleScroll();
+    }, 500);
+
+    // State ko clear kar dein taaki har refresh par scroll na hota rahe
+    window.history.replaceState({}, document.title);
+  }
+}, [location.state]);
 
 useEffect(() => {
   const fetchProducts = async () => {
