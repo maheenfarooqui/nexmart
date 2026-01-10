@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {useNavigate, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiMail } from 'react-icons/fi';
 import styles from './Footer.module.css';
 import logoFImg from '../../../assets/flogo.png';
@@ -29,33 +30,57 @@ const Footer = () => {
 
   // 3. Subscribe Function (Ab ye azad hai aur kaam karega)
   const handleSubscribe = async () => {
-    if (!email || !email.includes('@')) {
-      alert("Please enter a valid email address.");
-      return;
-    }
+  // 1. Invalid Email Alert
+  if (!email || !email.includes('@')) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a valid email address.',
+      confirmButtonColor: '#8dc447', // NexMart Green
+    });
+    return;
+  }
 
-    setIsSubmitting(true);
-    try {
-      const subscribersRef = collection(db, "subscribers");
-      const q = query(subscribersRef, where("email", "==", email));
-      const snap = await getDocs(q);
+  setIsSubmitting(true);
+  try {
+    const subscribersRef = collection(db, "subscribers");
+    const q = query(subscribersRef, where("email", "==", email));
+    const snap = await getDocs(q);
 
-      if (!snap.empty) {
-        alert("You're already on the list! ✨");
-      } else {
-        await addDoc(subscribersRef, {
-          email: email,
-          timestamp: serverTimestamp()
-        });
-        alert("Subscribed successfully! Check your inbox soon. 🚀");
-      }
-      setEmail('');
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Try again!");
+    if (!snap.empty) {
+      // 2. Already Subscribed Alert
+      Swal.fire({
+        icon: 'info',
+        title: 'Hey!',
+        text: "You're already on the list! ✨",
+        confirmButtonColor: '#8dc447',
+      });
+    } else {
+      await addDoc(subscribersRef, {
+        email: email,
+        timestamp: serverTimestamp()
+      });
+      // 3. Success Alert
+      Swal.fire({
+        icon: 'success',
+        title: 'Welcome to NexMart!',
+        text: 'Subscribed successfully! Check your inbox soon. 🚀',
+        confirmButtonColor: '#8dc447',
+      });
     }
-    setIsSubmitting(false);
-  };
+    setEmail('');
+  } catch (err) {
+    console.error(err);
+    // 4. Error Alert
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed',
+      text: 'Something went wrong. Try again!',
+      confirmButtonColor: '#d33',
+    });
+  }
+  setIsSubmitting(false);
+};
      
   return (
     <footer className={styles.footer}>

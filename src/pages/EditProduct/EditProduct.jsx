@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { db } from "../../services/firebase";;
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import styles from "../Sell/Sell.module.css"; // Same styling use kar sakte hain
+import Swal from 'sweetalert2';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -28,20 +29,47 @@ const EditProduct = () => {
   }, [id]);
 
   // 2. Data Update karne ka function
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      const docRef = doc(db, "products", id);
-      await updateDoc(docRef, {
-        ...formData,
-        price: Number(formData.price) // Price update
-      });
-      alert("Product Updated Successfully!");
-      navigate('/my-ads');
-    } catch (err) {
-      alert(err.message);
+ const handleUpdate = async (e) => {
+  e.preventDefault();
+
+  // Loading alert dikhayein jab tak update ho raha ho
+  Swal.fire({
+    title: 'Updating...',
+    text: 'Please wait while we save your changes.',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
     }
-  };
+  });
+
+  try {
+    const docRef = doc(db, "products", id);
+    await updateDoc(docRef, {
+      ...formData,
+      price: Number(formData.price) 
+    });
+
+    // Success Alert
+    await Swal.fire({
+      icon: 'success',
+      title: 'Product Updated!',
+      text: 'Your product has been updated successfully.',
+      confirmButtonColor: '#8dc447',
+      timer: 2000, // 2 seconds baad khud band ho jaye
+      showConfirmButton: true
+    });
+
+    navigate('/my-ads');
+  } catch (err) {
+    // Error Alert
+    Swal.fire({
+      icon: 'error',
+      title: 'Update Failed',
+      text: err.message,
+      confirmButtonColor: '#d33'
+    });
+  }
+};
 
   return (
     <div className={styles.container}>

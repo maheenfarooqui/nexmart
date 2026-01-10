@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"; // useState aur useEffect ad
 import { useParams, useNavigate } from "react-router-dom";
 import { db ,auth } from "../../services/firebase"; // Database connection
 import { doc, getDoc,addDoc,collection } from "firebase/firestore";
+import Swal from 'sweetalert2';
 import {
   FiArrowLeft,
   FiMessageCircle,
@@ -45,34 +46,77 @@ const ProductDetail = () => {
     return <div className={styles.loading}>Loading Product Details...</div>;
   if (!product) return <div className={styles.error}>Product not found!</div>;
 const handleBuyNow = async () => {
-  if (!auth.currentUser) return alert("Login to place an order!");
+  if (!auth.currentUser) {
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Login Required',
+      text: 'Please login to place an order and start trading! 🚀',
+      confirmButtonColor: '#8dc447'
+    });
+  }
+
+  // Loading state taaki user ko lage transaction ho rahi hai
+  Swal.fire({
+    title: 'Processing Order...',
+    didOpen: () => { Swal.showLoading(); }
+  });
 
   try {
     await addDoc(collection(db, "orders"), {
       productId: id,
       productTitle: product.title,
       price: product.price,
-      sellerId: product.sellerId, // Kisne becha
-      buyerId: auth.currentUser.uid, // Kisne khareeda
+      sellerId: product.sellerId,
+      buyerId: auth.currentUser.uid,
       buyerEmail: auth.currentUser.email,
-      status: "Pending", // Shuru mein pending
+      status: "Pending",
       createdAt: new Date()
     });
-    alert("Order request recorded! Seller will contact you.");
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Order Requested!',
+      text: 'Your request has been recorded. The seller will contact you soon! ✨',
+      confirmButtonColor: '#8dc447',
+    });
   } catch (err) {
-    alert("Error: " + err.message);
+    Swal.fire({
+      icon: 'error',
+      title: 'Order Failed',
+      text: 'Error: ' + err.message,
+      confirmButtonColor: '#d33'
+    });
   }
 };
-
-  const handleContactSeller = () => {
+const handleContactSeller = () => {
   if (product && product.phone) {
-    // Number se pehle '+' ya '00' nahi hona chahiye, direct 92 se shuru ho
     const phoneNumber = product.phone; 
     const message = encodeURIComponent(`Hi, I am interested in your product: ${product.title}`);
     
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    // Toast alert: User ko batane ke liye ke WhatsApp khul raha hai
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Opening WhatsApp...'
+    });
+
+    setTimeout(() => {
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }, 1000);
+
   } else {
-    alert("Seller hasn't provided a WhatsApp number!");
+    Swal.fire({
+      icon: 'error',
+      title: 'No Contact Info',
+      text: "Sorry, this seller hasn't provided a WhatsApp number!",
+      confirmButtonColor: '#d33'
+    });
   }
 };
 

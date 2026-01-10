@@ -3,6 +3,7 @@ import { db } from '../../services/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import styles from './Sell.module.css';
 
 const Sell = () => {
@@ -35,33 +36,76 @@ const Sell = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!user) return alert("Please login to post an ad!");
-    if (!imageFile) return alert("Please select an image!");
+  e.preventDefault();
 
-    setLoading(true); // Process shuru
-    try {
-      // 2. Pehle image upload hogi
-      const uploadedImageUrl = await uploadToImgBB(imageFile);
+  // 1. Validation Alerts
+  if (!user) {
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Login Required',
+      text: 'Please login to post your ad! 🚀',
+      confirmButtonColor: '#8dc447'
+    });
+  }
 
-      // 3. Phir Firestore mein data jayega
-      await addDoc(collection(db, "products"), {
-        ...formData,
-        image: uploadedImageUrl, // ImgBB wala link yahan save hoga
-        price: Number(formData.price),
-        sellerId: user.uid,
-        sellerEmail: user.email,
-        createdAt: new Date()
-      });
-      
-      alert("Product Listed Successfully!");
-      navigate('/my-ads'); // Behter hai ke my-ads pe jaye takay user apna ad dekh sakay
-    } catch (err) {
-      alert("Error: " + err.message);
-    } finally {
-      setLoading(false); // Process khatam
+  if (!imageFile) {
+    return Swal.fire({
+      icon: 'image',
+      title: 'Missing Image',
+      text: 'Please select a photo for your product!',
+      confirmButtonColor: '#8dc447'
+    });
+  }
+
+  // 2. Start Loading Alert (Image upload takes time)
+  Swal.fire({
+    title: 'Listing your Product...',
+    text: 'Uploading image and saving details. Please wait.',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
     }
-  };
+  });
+
+  setLoading(true);
+  try {
+    // 3. Image Upload (ImgBB)
+    const uploadedImageUrl = await uploadToImgBB(imageFile);
+
+    // 4. Firestore Data Entry
+    await addDoc(collection(db, "products"), {
+      ...formData,
+      image: uploadedImageUrl,
+      price: Number(formData.price),
+      sellerId: user.uid,
+      sellerEmail: user.email,
+      createdAt: new Date()
+    });
+
+    // 5. Success Alert
+    await Swal.fire({
+      icon: 'success',
+      title: 'Awesome!',
+      text: 'Product Listed Successfully! 🌟',
+      confirmButtonColor: '#8dc447',
+      timer: 2500,
+      timerProgressBar: true
+    });
+
+    navigate('/my-ads');
+    
+  } catch (err) {
+    // 6. Error Alert
+    Swal.fire({
+      icon: 'error',
+      title: 'Posting Failed',
+      text: "Error: " + err.message,
+      confirmButtonColor: '#d33'
+    });
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className={styles.container}>

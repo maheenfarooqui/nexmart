@@ -4,6 +4,7 @@ import { db, auth } from "../../services/firebase";
 import { collection, query, where, getDocs, deleteDoc, doc ,onSnapshot} from 'firebase/firestore';
 import ProductCard from "../../components/product/ProductCard/ProductCard";
 import styles from './MyAds.module.css';
+import Swal from 'sweetalert2';
 
 const MyAds = () => {
   const [myProducts, setMyProducts] = useState([]);
@@ -36,15 +37,37 @@ const MyAds = () => {
 }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this ad?")) {
-      await deleteDoc(doc(db, "products", id));
-      setMyProducts(myProducts.filter(ad => ad.id !== id)); // UI se foran remove karne ke liye
-      alert("Ad deleted successfully!");
+  // 1. Pehle confirm pucho
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',    // Red for Delete
+    cancelButtonColor: '#8dc447',  // NexMart Green for Cancel
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, keep it'
+  }).then(async (result) => {
+    
+    // 2. Agar user ne 'Yes' dabaya
+    if (result.isConfirmed) {
+      try {
+        await deleteDoc(doc(db, "products", id));
+        setMyProducts(myProducts.filter(ad => ad.id !== id));
+        
+        // Success message
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your ad has been removed.',
+          icon: 'success',
+          confirmButtonColor: '#8dc447'
+        });
+      } catch (err) {
+        Swal.fire('Error', 'Failed to delete the ad.', 'error');
+      }
     }
-  };
-  if (!auth.currentUser) return <div>Please Login...</div>;
-
-  if (loading) return <div className={styles.loader}>Loading your ads...</div>;
+  });
+};
   
 
 
@@ -80,7 +103,7 @@ const MyAds = () => {
       <h2 className={styles.sectionTitle}>Orders Received ({orders.length})</h2>
       <div className={styles.orderList}>
         {orders.length === 0 ? (
-          <p className={styles.emptyMsg}>Abhi tak koi order nahi aaya.</p>
+          <p className={styles.emptyMsg}>No orders received yet.</p>
         ) : (
           orders.map((order) => (
             <div key={order.id} className={styles.orderCard}>

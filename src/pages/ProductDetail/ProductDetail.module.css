@@ -1,7 +1,7 @@
-/* .container {
+.container {
   padding: 20px 70px;
-  background-color: var(--color-text-dim);
-} */
+  
+}
 
 .backBtn {
   background: transparent;
@@ -60,6 +60,13 @@
   border-radius: 8px;
   margin-bottom: 20px;
 }
+.sellerInfo p{
+  color: var(--color-brand);
+}
+.sellerInfo p strong{
+  color: rgba(255, 255, 255, 0.7);
+}
+
 
 .description {
   color: rgba(255, 255, 255, 0.7);
