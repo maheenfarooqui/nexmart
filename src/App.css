@@ -8,9 +8,6 @@
 main {
   flex: 1; /* Taaki footer hamesha neche rahe */
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-m);
 }
 
 /* Common Section Styling */

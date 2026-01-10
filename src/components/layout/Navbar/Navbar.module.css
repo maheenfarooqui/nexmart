@@ -197,8 +197,71 @@
   border: 2px solid white;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .searchBar { display: none; } /* Mobile par search hide ya icon mein convert */
-  .sellBtn span { display: none; } /* Mobile par sirf icon */
+/* ... Aapki purani sari CSS wese hi rahegi ... */
+
+/* Hamburger Icon styling (By default hidden) */
+.menuIcon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--color-text-dim);
+}
+
+/* Tablet & Mobile (Standard Breakpoint) */
+@media (max-width: 992px) {
+  .menuIcon {
+    display: block;
+    z-index: 1001; /* Isay sabse upar hona chahiye */
+    position: relative;
+  }
+
+  .searchBar {
+    display: none; /* Mobile par search hide */
+  }
+
+  .navLinks {
+    position: fixed; /* Poori screen par kabza karne ke liye */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Items bilkul center mein aayenge */
+    gap: 2.5rem;
+    transition: all 0.4s ease-in-out;
+    
+    /* Shuru mein ye upar ki taraf chupa hoga */
+    transform: translateY(-100%); 
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+  }
+
+  /* Jab menu active ho */
+  .navLinks.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navLinks a, .userSection {
+    font-size: 1.5rem; /* Links thore bade dikhen full screen par */
+    font-weight: 700;
+  }
+
+  .userSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Login/Signup Text bada karne ke liye */
+  .loginText {
+    font-size: 1.5rem;
+  }
 }
