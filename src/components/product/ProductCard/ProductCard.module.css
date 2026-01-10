@@ -4,6 +4,7 @@
   overflow: hidden;
   transition: transform 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
+
 }
 
 .card:hover {
@@ -13,13 +14,17 @@
 
 .imageWrapper {
   position: relative;
-  height: 200px;
+  height: 220px; /* Thori si height badha di look behtar karne ke liye */
+  width: 100%;
+  background-color: #1a1a1a; /* Jab tak image load na ho tab tak dark background dikhe */
 }
 
 .imageWrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block; /* Ye zaroori hai extra space hatane ke liye */
+  image-rendering: -webkit-optimize-contrast; /* Clear image ke liye */
 }
 
 .wishlistBtn {
@@ -49,9 +54,10 @@
 .title {
   margin: 8px 0;
   font-size: 1.1rem;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  height: 2.6rem; /* Line height ke hisab se fix height */
 }
 
 .footer {
