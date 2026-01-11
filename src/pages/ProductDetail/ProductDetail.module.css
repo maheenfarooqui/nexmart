@@ -1,6 +1,5 @@
 .container {
   padding: 20px 70px;
-  
 }
 
 .backBtn {
@@ -60,13 +59,12 @@
   border-radius: 8px;
   margin-bottom: 20px;
 }
-.sellerInfo p{
+.sellerInfo p {
   color: var(--color-brand);
 }
-.sellerInfo p strong{
+.sellerInfo p strong {
   color: rgba(255, 255, 255, 0.7);
 }
-
 
 .description {
   color: rgba(255, 255, 255, 0.7);
@@ -120,7 +118,71 @@
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.5);
 }
+/* Specific Mobile Fix for 500px and below */
+@media (max-width: 500px) {
+  .container {
+    padding: 10px; /* Side padding khatam ki */
+  }
+
+  .backBtn {
+    margin-left: 10px; /* Back button ko edge ke qareeb kiya */
+    font-size: 0.9rem;
+  }
+
+  .wrapper {
+    padding: 1rem;
+    border-radius: 12px; /* Thora sharp look */
+    gap: 1.5rem;
+  }
+
+  .mainImg {
+    max-height: 300px; /* Image ki height choti kar di */
+    border-radius: 12px;
+  }
+
+  .productTitle {
+    font-size: 1.6rem; /* Font size chota kiya */
+    line-height: 1.2;
+  }
+
+  .priceTag {
+    font-size: 1.5rem; /* Price ko thora balance kiya */
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    font-size: 0.9rem; /* Text chota kiya taaki scroll kam ho */
+    margin-bottom: 1.5rem;
+  }
+
+  /* Buttons ko upar niche (Vertical) set kiya */
+  .actions {
+    flex-direction: column; 
+    gap: 0.8rem;
+  }
+
+  .chatBtn, .buyBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .trustBadges {
+    flex-direction: column; /* Badges ko bhi vertical kiya */
+    gap: 10px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+  }
+}
+
+
 
 @media (max-width: 900px) {
-  .wrapper { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
+  .wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
 }
