@@ -223,13 +223,13 @@
     justify-content: center;
     flex-direction: column; /* Buttons ek ke niche ek */
     gap: 1rem;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
   }
 
   .grid {
     grid-template-columns: repeat(1, 1fr); /* Mobile par 1 column */
-    padding: 20px;
+    padding: 0px;
   }
 }
 
