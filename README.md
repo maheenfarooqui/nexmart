@@ -1,16 +1,147 @@
-# React + Vite
+<p align="center">
+  <img src="./src/assets/logo.png" alt="Logo" width="120" />
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Nex Mart</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+  Marketplace MVP
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  <a href="nextgenmart.netlify.app">Live Demo</a>
+</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📖 Overview
 
-## Expanding the ESLint configuration
+Nex Mart is a marketplace MVP that enables users to browse products, create seller accounts, upload product listings, and manage their inventory through a simple and responsive interface. The project focuses on demonstrating a complete buying and selling workflow using Firebase and React.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- User authentication
+- Buyer and seller accounts
+- Product listings
+- Product image uploads
+- CRUD operations
+- Marketplace browsing
+- Responsive design
+- Real-time Firebase database
+- Clean and modern UI
+
+---
+
+## 🎯 Problem
+
+Small businesses and independent sellers often rely on social media platforms to sell products, making it difficult to organize listings, manage inventory, and provide customers with a structured shopping experience.
+
+---
+
+## 💡 Solution
+
+Developed a marketplace MVP where users can register as sellers, upload product images, manage listings, and sell products through a responsive web application. Firebase Authentication and Firestore provide secure user management and real-time data synchronization.
+
+---
+
+## 🚀 Result
+
+Delivered a functional marketplace demonstrating complete buyer and seller workflows, including authentication, product management, image uploads, and real-time database operations.
+
+---
+
+## 🛠 Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- Firebase
+- Firestore
+- Firebase Authentication
+- Firebase Storage
+- Lucide React
+
+---
+
+## 📚 Engineering Insights
+
+- Implementing Firebase Authentication
+- Building CRUD operations with Firestore
+- Uploading and managing product images
+- Designing buyer and seller workflows
+- Managing application state across multiple pages
+- Building a complete marketplace MVP using React
+
+---
+
+## 📂 Folder Structure
+
+```text
+Nex-Mart/
+│
+├── public/
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── context/
+│   ├── firebase/
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
+│   ├── utils/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/maheenfarooqui/nexmart
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+npm run dev
+```
+
+Create a production build
+
+```bash
+npm run build
+```
+
+---
+
+## 🌐 Live Demo
+
+nextgenmart.netlify.app
+
+---
+
+## 👩‍💻 Author
+
+**Maheen Zuhra**
+
+Frontend Developer
+
+- Portfolio: https://maheen-zuhra-portfolio.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/maheen-zuhra/
